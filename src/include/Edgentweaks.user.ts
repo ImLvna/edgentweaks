@@ -1,9 +1,16 @@
-// this is typescript because i was deobfuscating the assignment unlocker
-// not changing it back bc im too lazy
+/*
 
+  This is the original edgentweaks v1.5.6
+
+  It has been modified with the following changes:
+  - Converted to TypeScript
+  - Deobfuscated Assignment Unlocker
+
+  There are no other changes.
+
+*/
 export default function start() {
   const version_num = "1.5.6";
-  //2 sec delay to load before trying to run
   function main() {
     window.EdgenTweaks._.log(
       "Welcome to EdgenTweaks. You currently have version " + version_num + ".",
