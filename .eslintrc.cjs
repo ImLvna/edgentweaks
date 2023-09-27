@@ -8,7 +8,7 @@ module.exports = {
     "plugin:svelte/recommended",
     "plugin:svelte/prettier",
   ],
-  ignorePatterns: ["dist/**/*", "**/*.html", "**/*.md"],
+  ignorePatterns: ["dist/**/*", "**/*.html", "**/*.md", "src/include/**/*"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     // ...
