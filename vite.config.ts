@@ -25,11 +25,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: undefined,
-        globals: {
-          jquery: "$",
-        },
       },
-      external: ["jquery"],
     },
     lib: {
       entry: "src/main.ts",
