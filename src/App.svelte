@@ -102,11 +102,11 @@
 
 {#if $settings.showLogs}
   <div class="bottomleft logsWindow noClick">
-    <ul>
+    <div>
       {#each $logs as log}
-        <li>{log}</li>
+        <span>{log}</span>
       {/each}
-    </ul>
+    </div>
   </div>
 {/if}
 <div class="modalWrapper">
