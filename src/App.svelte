@@ -187,12 +187,6 @@
 
     max-height: 140px;
     overflow-y: scroll;
-
-    ul {
-      padding-inline-start: unset;
-      margin-block-start: unset;
-      margin-block-end: unset;
-    }
   }
 
   .noButton {
