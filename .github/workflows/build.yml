@@ -25,7 +25,7 @@ jobs:
 
       - name: Upload Release
         run: |
-          gh repease upload devbuild --clobber dist/* userscripts/edgentweaks-updating.user.js
+          gh release upload devbuild --clobber dist/* userscripts/edgentweaks-updating.user.js
           gh release edit devbuild --title "Dev Build $RELEASE_TAG"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
