@@ -1,0 +1,46 @@
+{
+  "name": "edgentweaks",
+  "private": true,
+  "version": "2.0.0",
+  "homepage": "https://github.com/imlvna/edgentweaks",
+  "repository": "github:imlvna/edgentweaks",
+  "author": {
+    "name": "Luna <3",
+    "email": "luna@loveh.art",
+    "url": "https://github.com/imlvna"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.4.2",
+    "@tsconfig/svelte": "^5.0.0",
+    "@types/jquery": "^3.5.19",
+    "@types/node": "^20.7.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "bun-types": "^1.0.3",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-svelte": "^2.33.2",
+    "jquery": "^3.7.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-svelte": "^3.0.3",
+    "sass": "^1.68.0",
+    "svelte": "^4.0.5",
+    "svelte-check": "^3.4.6",
+    "tslib": "^2.6.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-banner": "^0.7.1",
+    "vite-plugin-css-injected-by-js": "^3.3.0",
+    "vite-plugin-mkcert": "^1.16.0"
+  }
+}

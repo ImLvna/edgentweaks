@@ -1,0 +1,32 @@
+on: [push]
+
+name: Build
+jobs:
+  build:
+    name: Buid
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: oven-sh/setup-bun@v1
+
+      - run: bun install
+      - run: bun run build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
+
+      - name: Get some values needed for the release
+        id: release_values
+        run: |
+          echo "release_tag=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Upload Release
+        run: |
+          gh repease upload devbuild --clobber dist/* userscripts/edgentweaks-updating.user.js
+          gh release edit devbuild --title "Dev Build $RELEASE_TAG"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ env.release_tag }}
