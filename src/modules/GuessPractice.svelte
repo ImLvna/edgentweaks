@@ -14,7 +14,7 @@
   //TODO: Remove jquery calls in favor of native js
 
   const execute: Executor = {
-    name: "Template",
+    name: "GuessPractice",
     supports: ["player"],
     loop() {
       if (!$settings.guessPractice) return;

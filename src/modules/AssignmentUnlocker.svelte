@@ -10,7 +10,7 @@
   let setup = false;
 
   const execute: Executor = {
-    name: "Assignment Unlocker",
+    name: "AssignmentUnlocker",
     supports: ["manager"],
     loop() {
       if (!$settings.assignmentUnlocker) return;
