@@ -9,11 +9,12 @@ const target = document.createElement("div");
 target.id = "edgentweaks";
 document.body.appendChild(target);
 
-const app = new App({
+new App({
   target,
 });
 
 (async () => {
+  await new Promise((r) => setTimeout(r, 100));
   if (IS_EDGENUITY_PLAYER || IS_DEV) {
     while (!document.querySelector(".toolbar"))
       await new Promise((r) => setTimeout(r, 1));
@@ -28,5 +29,3 @@ const app = new App({
     });
   }
 })();
-
-export default app;
