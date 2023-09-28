@@ -88,6 +88,45 @@
     setTimeout(() => {
       $suppressErrors = false;
     }, 3000);
+
+    function getIframeKeys(_window: Window) {
+      _window.addEventListener("keydown", (e) => {
+        window.EdgenTweaks._.stores.keyEvent.set(e);
+      });
+      _window.addEventListener("keyup", (e) => {
+        window.EdgenTweaks._.stores.keyEvent.set(e);
+      });
+
+      if (!_window.document.getElementById("EdgenTweaksUserSelect")) {
+        const style = _window.document.createElement("style");
+        style.id = "EdgenTweaksUserSelect";
+        style.innerHTML = `
+          * {
+            user-select: unset !important;
+          }
+        `;
+
+        _window.document.head.appendChild(style);
+      }
+
+      const frames = _window.document.getElementsByTagName("iframe");
+
+      for (const frame of frames) {
+        try {
+          getIframeKeys(frame.contentWindow!);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+
+    setInterval(() => {
+      try {
+        getIframeKeys(window);
+      } catch (e) {
+        console.error(e);
+      }
+    }, 1000);
   });
 
   function toggleSettings(event: KeyboardEvent | MouseEvent) {
@@ -104,15 +143,6 @@
     });
   }
 </script>
-
-<svelte:window
-  on:keydown={(e) => {
-    $keyEvent = e;
-  }}
-  on:keyup={(e) => {
-    $keyEvent = e;
-  }}
-/>
 
 {#if !$settings.stealthMode}
   {#if $settings.showLogs}
