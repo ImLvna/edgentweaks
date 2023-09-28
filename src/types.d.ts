@@ -1,3 +1,4 @@
+import type { ComponentType } from "svelte";
 import type { Writable } from "svelte/store";
 
 import type { Executor } from "./modules";
@@ -9,7 +10,14 @@ declare global {
       modules: Record<string, Executor>;
       settings: Record<string, boolean>;
       _: {
-        settings: Writable<Record<string, boolean>>;
+        stores: {
+          logs: Writable<string[]>;
+          settings: Writable<Record<string, boolean>>;
+          suppressErrors: Writable<boolean>;
+          loop: Writable<boolean>;
+          keyEvent: Writable<KeyboardEvent>;
+          modals: Writable<Map<string, ComponentType>>;
+        };
         toggleSettings: () => void;
         legacyExecuted: boolean;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

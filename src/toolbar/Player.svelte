@@ -2,7 +2,7 @@
   import type { Writable } from "svelte/store";
 
   const settings: Writable<Record<string, boolean>> =
-    window.EdgenTweaks._.settings;
+    window.EdgenTweaks._.stores.settings;
 </script>
 
 {#if !$settings.stealthMode}

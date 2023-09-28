@@ -29,10 +29,28 @@
     localStorage.setItem("edgentweaks", JSON.stringify(settings));
   });
   setContext("settings", settings);
+
+  // Loop is updated every frame, modules can subscribe to it to get a tick
+  const loop = writable(false);
+  setContext("loop", loop);
+  // KeyEvent is updated on keydown and keyup, modules can subscribe to it to get key events
+  const keyEvent = writable<KeyboardEvent | null>(null);
+  setContext("keyEvent", keyEvent);
+  // Suppress errors until everythings loaded
+  const suppressErrors = writable(true);
+  setContext("suppressErrors", suppressErrors);
+
   window.EdgenTweaks = {
     modules: {},
     _: {
-      settings,
+      stores: {
+        logs,
+        settings,
+        modals,
+        loop,
+        keyEvent,
+        suppressErrors,
+      },
       toggleSettings,
       legacyExecuted: false,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,16 +71,6 @@
       });
     },
   });
-
-  // Loop is updated every frame, modules can subscribe to it to get a tick
-  const loop = writable(false);
-  setContext("loop", loop);
-  // KeyEvent is updated on keydown and keyup, modules can subscribe to it to get key events
-  const keyEvent = writable<KeyboardEvent | null>(null);
-  setContext("keyEvent", keyEvent);
-  // Suppress errors until everythings loaded
-  const suppressErrors = writable(true);
-  setContext("suppressErrors", suppressErrors);
 
   onMount(() => {
     const settingsString = localStorage.getItem("edgentweaks");
