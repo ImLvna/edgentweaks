@@ -24,6 +24,7 @@
   }
 
   const version = EDG_VERSION;
+  const commit = EDG_COMMIT;
   const github = EDG_GITHUB_URL;
   const author = EDG_AUTHOR;
 </script>
@@ -39,6 +40,7 @@
   {/each}
 {/each}
 <a href={github}>EdgenTweaks v{version}</a>
+<a href={github + "/commit/" + commit}>@{commit}</a>
 <p>Maintained by <a href={author.url}>{author.name}</a></p>
 
 <style>

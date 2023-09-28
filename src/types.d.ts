@@ -19,6 +19,7 @@ declare global {
   }
 
   const EDG_VERSION: string;
+  const EDG_COMMIT: string;
   const EDG_GITHUB_URL: string;
   const EDG_AUTHOR: {
     name: string;

@@ -57,6 +57,7 @@ module.exports = {
 
   globals: {
     EDG_VERSION: true,
+    EDG_COMMIT: true,
     EDG_AUTHOR: true,
     EDG_GITHUB_URL: true,
   },
