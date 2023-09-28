@@ -14,7 +14,8 @@ new App({
 });
 
 (async () => {
-  await new Promise((r) => setTimeout(r, 100));
+  while (!window.EdgenTweaks) await new Promise((r) => setTimeout(r, 1));
+
   if (IS_EDGENUITY_PLAYER || IS_DEV) {
     while (!document.querySelector(".toolbar"))
       await new Promise((r) => setTimeout(r, 1));
