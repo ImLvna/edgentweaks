@@ -31,7 +31,13 @@
       (
         document.querySelector(".footnav.goRight") as HTMLElement | null
       )?.click();
-      (document.querySelector(".FrameRight") as HTMLElement | null)?.click();
+      (
+        (
+          document.getElementById("stageFrame") as HTMLIFrameElement | null
+        )?.contentWindow?.document.querySelector(
+          ".FrameRight",
+        ) as HTMLElement | null
+      )?.click();
     },
   };
 
