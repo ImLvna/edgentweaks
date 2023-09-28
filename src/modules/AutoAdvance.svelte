@@ -13,6 +13,7 @@
   const execute: Executor = {
     name: "AutoAdvance",
     supports: ["player"],
+    timeout: 1000,
     loop() {
       if (!$settings.autoAdvance) return;
       if (
