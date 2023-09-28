@@ -3,6 +3,7 @@
   import type { Writable } from "svelte/store";
 
   import { type defaultSettings } from "../settings";
+  import { getStageFrame, querySelector } from "../util";
   import { type Executor, setupModule } from ".";
   const settings = getContext<Writable<typeof defaultSettings>>("settings");
 
@@ -15,29 +16,14 @@
     loop() {
       if (!$settings.autoAdvance) return;
       if (
-        disabledFor.includes(
-          (document.getElementById("activity-title") as HTMLElement | null)
-            ?.innerText ?? "",
-        )
+        disabledFor.includes(querySelector("#activity-title")?.innerText ?? "")
       )
         return;
-      if (
-        "Complete" ===
-        (document.getElementById("activity-status") as HTMLElement | null)
-          ?.innerText
-      )
-        return;
+      if ("Complete" === querySelector("#activity-status")?.innerText) return;
 
-      (
-        document.querySelector(".footnav.goRight") as HTMLElement | null
-      )?.click();
-      (
-        (
-          document.getElementById("stageFrame") as HTMLIFrameElement | null
-        )?.contentWindow?.document.querySelector(
-          ".FrameRight",
-        ) as HTMLElement | null
-      )?.click();
+      querySelector(".footnav.goRight")?.click();
+
+      querySelector(".FrameRight", getStageFrame().contentDocument!)?.click();
     },
   };
 

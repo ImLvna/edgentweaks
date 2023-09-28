@@ -19,6 +19,13 @@ export const settingsData: Record<string, Setting> = {
     category: "General",
     show: () => IS_EDGENUITY_PLAYER,
   },
+  guessPractice: {
+    name: "Guess Practice",
+    description: "Automatically complete practice",
+    default: false,
+    category: "QOL",
+    show: () => IS_EDGENUITY_PLAYER,
+  },
   skipIntro: {
     name: "Skip Intro",
     description: "Skip the intro video",

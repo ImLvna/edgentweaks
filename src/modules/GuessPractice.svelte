@@ -1,17 +1,15 @@
 <script lang="ts">
-  import jq from "jquery";
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
 
   import { type defaultSettings } from "../settings";
+  import { getStageFrame, querySelector, querySelectorAll } from "../util";
   import { type Executor, setupModule } from ".";
   const settings = getContext<Writable<typeof defaultSettings>>("settings");
 
   // Module Code
 
   const supports = ["Instruction", "Warm-Up", "Summary", "Lecture"];
-
-  //TODO: Remove jquery calls in favor of native js
 
   const execute: Executor = {
     name: "GuessPractice",
@@ -22,32 +20,35 @@
         !supports.includes(document.getElementById("activity-title")!.innerText)
       )
         return;
-      let numOption: number;
-      numOption = jq("iframe#stageFrame")
-        .contents()
-        .find("form")
-        .find(".answer-choice-button").length;
-      if (numOption > 0) {
-        jq("iframe#stageFrame")
-          .contents()
-          .find("form")
-          .find(".answer-choice-button")
-          [Math.floor(Math.random() * Math.floor(numOption))].click();
-      } else if (
-        jq("#stageFrame")
-          .contents()
-          .find("iframe")
-          .contents()
-          .find(".answer-choice-button").length > 0
-      ) {
-        jq("#stageFrame")
-          .contents()
-          .find("iframe")
-          .contents()
-          .find(".answer-choice-button")
-          [Math.floor(Math.random() * Math.floor(4))].click();
+
+      const allEntries = querySelectorAll(
+        "form > .answer-choice-button",
+        getStageFrame().contentDocument!,
+      );
+      if (allEntries.length > 0) {
+        allEntries[
+          Math.floor(Math.random() * Math.floor(allEntries.length))
+        ].click();
+      } else {
+        const iframe = querySelector(
+          "iframe",
+          getStageFrame().contentDocument!,
+        ) as HTMLIFrameElement;
+
+        if (iframe) {
+          const allEntries = querySelectorAll(
+            ".answer-choice-button",
+            iframe.contentDocument!,
+          );
+          if (allEntries.length > 0) {
+            allEntries[
+              Math.floor(Math.random() * Math.floor(allEntries.length))
+            ].click();
+          }
+        }
       }
-      jq("#stageFrame").contents().find("#btnCheck")[0].click();
+
+      querySelector("#btnCheck", getStageFrame().contentDocument!)?.click();
     },
   };
 
