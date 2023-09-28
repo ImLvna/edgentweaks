@@ -36,7 +36,7 @@ export const settingsData: Record<string, Setting> = {
   },
   stealthMode: {
     name: "Stealth Mode",
-    description: "Hide EdgenTweaks",
+    description: "Hide EdgenTweaks (press \\ (above enter) to toggle)",
     default: false,
     category: "Misc",
   },
