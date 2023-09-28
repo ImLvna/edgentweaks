@@ -34,6 +34,12 @@ export const settingsData: Record<string, Setting> = {
     category: "QOL",
     show: () => IS_EDGENUITY && !IS_EDGENUITY_PLAYER,
   },
+  stealthMode: {
+    name: "Stealth Mode",
+    description: "Hide EdgenTweaks",
+    default: false,
+    category: "Misc",
+  },
   showLogs: {
     name: "Show Logs",
     description: "Show EdgenTweaks Logs",

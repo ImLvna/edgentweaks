@@ -6,6 +6,7 @@ import AutoAdvance from "./AutoAdvance.svelte";
 import GuessPractice from "./GuessPractice.svelte";
 import Legacy from "./Legacy.svelte";
 import SkipIntro from "./SkipIntro.svelte";
+import StealthMode from "./StealthMode.svelte";
 
 type loopFunction = () => void;
 type keyEventFunction = (e: KeyboardEvent) => void;
@@ -16,6 +17,7 @@ export const modules = [
   GuessPractice,
   Legacy,
   SkipIntro,
+  StealthMode,
 ];
 
 export interface Executor {

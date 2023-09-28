@@ -1,3 +1,5 @@
+import type { Writable } from "svelte/store";
+
 import type { Executor } from "./modules";
 
 declare global {
@@ -7,6 +9,7 @@ declare global {
       modules: Record<string, Executor>;
       settings: Record<string, boolean>;
       _: {
+        settings: Writable<Record<string, boolean>>;
         toggleSettings: () => void;
         legacyExecuted: boolean;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

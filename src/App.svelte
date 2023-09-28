@@ -25,15 +25,14 @@
     if (firstUpdate) {
       return;
     }
-    logs.update((logs) => {
-      return [`settings updated: ${JSON.stringify(settings)}`, ...logs];
-    });
+    console.log("Settings updated", settings);
     localStorage.setItem("edgentweaks", JSON.stringify(settings));
   });
   setContext("settings", settings);
   window.EdgenTweaks = {
     modules: {},
     _: {
+      settings,
       toggleSettings,
       legacyExecuted: false,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -100,33 +99,39 @@
   }}
 />
 
-{#if $settings.showLogs}
-  <div class="bottomleft logsWindow noClick">
-    <div>
-      {#each $logs as log}
-        <span>{log}</span>
-      {/each}
+{#if !$settings.stealthMode}
+  {#if $settings.showLogs}
+    <div class="bottomleft logsWindow noClick">
+      <div>
+        {#each $logs as log}
+          <p>{log}</p>
+        {/each}
+      </div>
     </div>
+  {/if}
+  <div class="modalWrapper">
+    {#each $modals.entries() as [name, modal]}
+      <div
+        class="modal"
+        in:fade={{ duration: 100 }}
+        out:fade={{ duration: 100 }}
+      >
+        <button
+          class="close noButton"
+          on:click={() =>
+            modals.update((modals) => {
+              modals.delete(name);
+              return modals;
+            })}
+        >
+          X
+        </button>
+        <h1>{name}</h1>
+        <svelte:component this={modal} />
+      </div>
+    {/each}
   </div>
 {/if}
-<div class="modalWrapper">
-  {#each $modals.entries() as [name, modal]}
-    <div class="modal" in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-      <button
-        class="close noButton"
-        on:click={() =>
-          modals.update((modals) => {
-            modals.delete(name);
-            return modals;
-          })}
-      >
-        X
-      </button>
-      <h1>{name}</h1>
-      <svelte:component this={modal} />
-    </div>
-  {/each}
-</div>
 
 <div class="modules">
   {#each modules as module}

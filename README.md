@@ -14,7 +14,7 @@ Currently, I am working on re-implimenting old edgentweaks features. In the mean
 - [x] Auto Advance
 - [x] Guess Practice
 - [x] Skip Intro
+- [x] Stealth Mode
 - [ ] Auto Complete Vocab
 - [ ] Show Example Response
-- [ ] Stealth Mode
 - [ ] Search engines
