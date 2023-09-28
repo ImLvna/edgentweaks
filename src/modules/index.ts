@@ -23,6 +23,7 @@ export const modules = [
 export interface Executor {
   name: string;
   supports: ("player" | "manager" | "dev")[];
+  timeout?: number;
   loop?: () => void;
   keyEvent?: (e: KeyboardEvent) => void;
 }
@@ -33,13 +34,17 @@ export function setupModule(
     loop: Writable<boolean>;
     keyEvent: Writable<KeyboardEvent>;
     logs: Writable<string[]>;
+    suppressErrors: Writable<boolean>;
   },
 ) {
   window.EdgenTweaks.modules[execute.name] = execute;
   let errorTimeout = false;
   let errorCooldown = 0;
+
+  let suppressingErrors = true;
   function catchError(e: unknown) {
     console.error(e);
+    if (suppressingErrors) return;
     stores.logs.update((logs) => {
       return [`Error running ${execute.name}`, ...logs];
     });
@@ -51,10 +56,19 @@ export function setupModule(
     }, errorCooldown);
   }
 
-  function wrapFunction(fn: loopFunction | keyEventFunction) {
+  let ready = true;
+
+  function wrapFunction(fn: loopFunction | keyEventFunction, timeout?: number) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return function (args: any) {
       if (errorTimeout) return;
+      if (!ready) return;
+      if (timeout) {
+        ready = false;
+        setTimeout(() => {
+          ready = true;
+        }, timeout);
+      }
       try {
         fn(args as never);
       } catch (e) {
@@ -77,7 +91,12 @@ export function setupModule(
 
   if (!isSupported) return;
 
-  if (execute.loop) stores.loop.subscribe(wrapFunction(execute.loop));
+  stores.suppressErrors.subscribe((value) => {
+    suppressingErrors = value;
+  });
+
+  if (execute.loop)
+    stores.loop.subscribe(wrapFunction(execute.loop, execute.timeout));
   if (execute.keyEvent)
     stores.keyEvent.subscribe(wrapFunction(execute.keyEvent));
 }

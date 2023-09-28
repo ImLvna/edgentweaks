@@ -108,7 +108,8 @@
   // SETUP CODE
 
   const logs = getContext<Writable<string[]>>("logs");
+  const suppressErrors = getContext<Writable<boolean>>("suppressErrors");
   const loop = getContext<Writable<boolean>>("loop");
   const keyEvent = getContext<Writable<KeyboardEvent>>("keyEvent");
-  setupModule(execute, { logs, loop, keyEvent });
+  setupModule(execute, { logs, loop, keyEvent, suppressErrors });
 </script>
