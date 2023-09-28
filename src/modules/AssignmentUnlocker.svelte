@@ -58,7 +58,7 @@
           document.location.href.indexOf("enrollment") + 11;
         const enrollment = document.location.href.substring(
           enrollmentIndex,
-          36,
+          36 + enrollmentIndex,
         );
         const activityUrl = `//r${
           realm.length == 1 ? "0" : ""
