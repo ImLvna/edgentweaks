@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { type ComponentType, onMount, setContext } from "svelte";
+  import { onMount, setContext, type ComponentType } from "svelte";
   import { writable } from "svelte/store";
   import { fade } from "svelte/transition";
 
   import SettingsModal from "./modals/Settings.svelte";
   import { modules } from "./modules";
   import { defaultSettings } from "./settings";
+  import * as utils from "./util";
 
   const modals = writable<Map<string, ComponentType>>(new Map());
   setContext("modals", modals);
@@ -42,6 +43,7 @@
 
   window.EdgenTweaks = {
     modules: {},
+    utils,
     _: {
       stores: {
         logs,

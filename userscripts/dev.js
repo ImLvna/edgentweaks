@@ -11,6 +11,6 @@ console.log("Loading edgentweaks dev instance");
 scripts.forEach((script) => {
   const scriptTag = document.createElement("script");
   scriptTag.type = "module";
-  scriptTag.src = `https://localhost:4000/${script}`;
+  scriptTag.src = `https://localhost:5173/${script}`;
   document.body.appendChild(scriptTag);
 });

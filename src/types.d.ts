@@ -9,6 +9,7 @@ declare global {
     EdgenTweaks: {
       modules: Record<string, Executor>;
       settings: Record<string, boolean>;
+      utils: typeof import("./util");
       _: {
         stores: {
           logs: Writable<string[]>;

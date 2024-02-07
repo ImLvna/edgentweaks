@@ -7,6 +7,7 @@ import GuessPractice from "./GuessPractice.svelte";
 import Legacy from "./Legacy.svelte";
 import SearchEngines from "./SearchEngines.svelte";
 import SkipIntro from "./SkipIntro.svelte";
+import SpeedUpVideo from "./SpeedUpVideo.svelte";
 import StealthMode from "./StealthMode.svelte";
 
 type loopFunction = () => void;
@@ -20,6 +21,7 @@ export const modules = [
   SkipIntro,
   StealthMode,
   SearchEngines,
+  SpeedUpVideo,
 ];
 
 export interface Executor {
@@ -62,7 +64,7 @@ export function setupModule(
 
   function wrapFunction(fn: loopFunction | keyEventFunction, timeout?: number) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return function (args: any) {
+    return (args: any) => {
       if (errorTimeout) return;
       if (!ready) return;
       if (timeout) {

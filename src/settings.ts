@@ -41,6 +41,13 @@ export const settingsData: Record<string, Setting> = {
     category: "QOL",
     show: () => IS_EDGENUITY && !IS_EDGENUITY_PLAYER,
   },
+  speedUpVideo: {
+    name: "Speed Up Video",
+    description: "Speed up the video to 10x",
+    default: false,
+    category: "QOL",
+    show: () => IS_EDGENUITY_PLAYER,
+  },
   stealthMode: {
     name: "Stealth Mode",
     description: "Hide EdgenTweaks (press \\ (above enter) to toggle)",
